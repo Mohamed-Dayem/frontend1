@@ -3,7 +3,7 @@ name: automate frontend
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
