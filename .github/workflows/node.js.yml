@@ -1,0 +1,38 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: automate frontend
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: |
+        sudo apt update
+        sudo apt install -y nodejs npm
+        npm install npm@9 -g
+        git clone https://github.com/louislam/uptime-kuma.git
+        cd uptime-kuma
+        npm run setup
+        node server/server.js
+        npm install pm2 -g && pm2 install pm2-logrotate
+        pm2 start server/server.js --name uptime-kuma
+
