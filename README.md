@@ -1,4 +1,4 @@
-- First I configured the frontend EC2 As a runner for the GITHub Repo
+- First I configured the frontend EC2 As a runner for the GITHub Repo.
 - ![Screenshot 2024-03-10 163254](https://github.com/Mohamed-Dayem/frontend1/assets/141914187/4a1cbef0-8102-43d7-8e3f-dd31ac45ae56)
 
 Then add a workflow file for configure the automation of the frontend application code 
